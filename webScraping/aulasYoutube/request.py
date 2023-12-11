@@ -1,4 +1,11 @@
 import requests as req
+from bs4 import BeautifulSoup
 
-response = req.get("https://www.amazon.com.br/Verbo-Intransitivo-Id%C3%ADlio-Mario-Andrade/dp/8567097258/ref=sr_1_3?crid=2SFR2J4ISYT32&keywords=amar+verbo+intransitivo&qid=1702332719&sprefix=amar+verbo+in%2Caps%2C263&sr=8-3");
-print(response.content);
+response = req.get("https://a.co/d/buXB5JF");
+conteudo = response.content;
+site = BeautifulSoup(conteudo, 'html.parser');
+
+produtos = site.find('div', attrs={'class':'a-section a-spacing-none'});
+print(produtos)
+# for produto in produtos:
+#     print(produto.find('h1', attrs={'class':'a-spacing-none a-text-normal'}));
