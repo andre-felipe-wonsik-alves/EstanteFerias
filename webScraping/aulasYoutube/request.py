@@ -1,17 +1,20 @@
 import requests as req
 from bs4 import BeautifulSoup
 
-while True:
-    nomeLivro = input("Nome do livro: ")
-    if nomeLivro == "sair":
-        break
-    url = f"https://www.estantevirtual.com.br/busca?q={nomeLivro}"
+nomeLivro = input("Nome do livro: ")
+        
+url = f"https://www.estantevirtual.com.br/busca?q={nomeLivro}"
 
-    res = req.get(url)
-    paginaLivro = BeautifulSoup(res.text, 'html.parser')
-    paginaLivro.find('div', attrs={'class': 'livro'})
+res = req.get(url)
+paginaLivro = BeautifulSoup(res.text, 'html.parser')
 
-    tituloLivro = paginaLivro.find('h2', attrs={'itemprop': 'name'})
-    autorLivro = paginaLivro.find('span', attrs={'itemprop' : 'author'})
-    print(tituloLivro.text)
-    print(autorLivro.text)
+livros = paginaLivro.findAll('div', attrs={'class': 'livro'})
+
+for livro in livros:
+    tituloLivro = livro.find('h2', attrs={'itemprop': 'name'})
+    autorLivro = livro.find('span', attrs={'itemprop' : 'author'})
+    capaLivro = livro.find('img', attrs={'itemprop':'image'})
+
+    if(tituloLivro): print(tituloLivro.text)
+    if(autorLivro): print(autorLivro.text)
+    if(capaLivro): print(capaLivro.text)
