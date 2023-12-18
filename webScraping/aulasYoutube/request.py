@@ -1,11 +1,17 @@
 import requests as req
 from bs4 import BeautifulSoup
 
-response = req.get("https://a.co/d/buXB5JF");
-conteudo = response.content;
-site = BeautifulSoup(conteudo, 'html.parser');
+while True:
+    nomeLivro = input("Nome do livro: ")
+    if nomeLivro == "sair":
+        break
+    url = f"https://www.estantevirtual.com.br/busca?q={nomeLivro}"
 
-produtos = site.find('div', attrs={'class':'a-section a-spacing-none'});
-print(produtos)
-# for produto in produtos:
-#     print(produto.find('h1', attrs={'class':'a-spacing-none a-text-normal'}));
+    res = req.get(url)
+    paginaLivro = BeautifulSoup(res.text, 'html.parser')
+    paginaLivro.find('div', attrs={'class': 'livro'})
+
+    tituloLivro = paginaLivro.find('h2', attrs={'itemprop': 'name'})
+    autorLivro = paginaLivro.find('span', attrs={'itemprop' : 'author'})
+    print(tituloLivro.text)
+    print(autorLivro.text)
