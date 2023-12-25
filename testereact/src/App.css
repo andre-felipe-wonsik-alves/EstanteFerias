@@ -1,5 +1,8 @@
 :root {
-  --bgColor: green;
+  --bgColor: #fffcf2;
+  --textColor: #252422;
+  --primaryColor: #ccc5b9;
+  --accentColor: #63c132;
 }
 
 * {
