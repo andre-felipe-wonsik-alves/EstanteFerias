@@ -7,33 +7,72 @@ import { FaEdit, FaWindowClose } from "react-icons/fa";
 
 export default class main extends Component {
   state = {
-    novaTarefa: "",
-    livros: [
-      "Laranja mecânica",
-      "Ensaio sobre a cegueira",
-      "Crônica da casa assassinada",
-    ],
+    novoLivro: "",
+    livros: [],
+    index: -1,
   };
-  handleSubmit = (e) => {
-    e.preventDefault();
-  };
+
   handleInput = (e) => {
     this.setState({
-      novaTarefa: e.target.value,
+      novoLivro: e.target.value,
     });
   };
 
+  handleEdit = (e, index) => {
+    const { livros } = this.state;
+    this.setState({
+      index,
+      novoLivro: livros[index],
+    });
+  };
+
+  handleDelete = (e, index) => {
+    const { livros } = this.state;
+    const novosLivros = [...livros];
+    novosLivros.splice(index, 1);
+
+    this.setState({
+      livros: [...novosLivros],
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { livros, index } = this.state;
+    let { novoLivro } = this.state;
+    novoLivro = novoLivro.trim();
+
+    if (livros.indexOf(novoLivro) !== -1) return;
+
+    const novosLivros = [...livros];
+
+    if (index === -1) {
+      this.setState({
+        livros: [...novosLivros, novoLivro],
+        novoLivro: "",
+      });
+    } else {
+      const novosLivros = [...livros];
+      novosLivros[index] = novoLivro;
+
+      this.setState({
+        livros: [...novosLivros],
+        index: -1,
+      });
+    }
+  };
+
   render() {
-    const { novaTarefa, livros } = this.state;
+    const { novoLivro, livros } = this.state;
     return (
       <div className="main">
-        <h1>Biblioteca</h1>
+        <h1>Biblioteca - React</h1>
 
         <form onSubmit={this.handleSubmit} action="#" className="forms">
           <input
             onChange={this.handleInput}
             type="text"
-            value={novaTarefa}
+            value={novoLivro}
           ></input>
           <button type="submit">
             <FaPlus />
@@ -41,13 +80,19 @@ export default class main extends Component {
         </form>
 
         <ul className="livros">
-          {livros.map((livro) => (
+          {livros.map((livro, index) => (
             <li key={livro}>
               <div className="livro">
                 {livro}
                 <div className="opcoesLivro">
-                  <FaEdit className="editLivro" />
-                  <FaWindowClose className="apagarLivro" />
+                  <FaEdit
+                    onClick={(e) => this.handleEdit(e, index)}
+                    className="editLivro"
+                  />
+                  <FaWindowClose
+                    onClick={(e) => this.handleDelete(e, index)}
+                    className="apagarLivro"
+                  />
                 </div>
               </div>
             </li>
