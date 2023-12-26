@@ -12,6 +12,22 @@ export default class main extends Component {
     index: -1,
   };
 
+  componentDidMount() {
+    //executa cada vez que o componente é criado
+    const livros = JSON.parse(localStorage.getItem("livros"));
+    if (!livros) return;
+
+    this.setState({ livros });
+  }
+  componentDidUpdate(prevProps, prevState) {
+    //executa a cada atualizacao do componente
+    const { livros } = this.state;
+
+    if (livros === prevState) return;
+
+    localStorage.setItem("livros", JSON.stringify(livros));
+  }
+
   handleInput = (e) => {
     this.setState({
       novoLivro: e.target.value,
