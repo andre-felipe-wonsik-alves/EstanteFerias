@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+:root {
+  --bgColor: #fffcf2;
+  --textColor: #252422;
+  --primaryColor: #ccc5b9;
+  --accentColor: #63c132;
+
+  --primaryFont: "Montserrat", sans-serif;
+}
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+
+  font-family: var(--primaryFont);
+}
+
+.livros {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5vh;
+  row-gap: 3vh;
+  list-style: none;
+}
+.livro {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.livro:hover {
+  border-bottom: 2px solid var(--accentColor);
+}
+
+.opcoesLivro {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+.editLivro:hover {
+  color: var(--accentColor);
+  transition: 0.3s;
+}
+.apagarLivro {
+  color: var(--bgColor);
+}

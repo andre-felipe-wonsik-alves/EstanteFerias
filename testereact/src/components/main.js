@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import "./main.css";
-
-// FORM (importando icones com o comando "npm i react-icons")
-import { FaPlus } from "react-icons/fa";
-import { FaEdit, FaWindowClose } from "react-icons/fa";
+import Form from "./Form";
+import Livros from "./Livros";
 
 export default class main extends Component {
   state = {
@@ -83,37 +81,17 @@ export default class main extends Component {
     return (
       <div className="main">
         <h1>Biblioteca - React</h1>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleInput={this.handleInput}
+          novoLivro={novoLivro}
+        />
 
-        <form onSubmit={this.handleSubmit} action="#" className="forms">
-          <input
-            onChange={this.handleInput}
-            type="text"
-            value={novoLivro}
-          ></input>
-          <button type="submit">
-            <FaPlus />
-          </button>
-        </form>
-
-        <ul className="livros">
-          {livros.map((livro, index) => (
-            <li key={livro}>
-              <div className="livro">
-                {livro}
-                <div className="opcoesLivro">
-                  <FaEdit
-                    onClick={(e) => this.handleEdit(e, index)}
-                    className="editLivro"
-                  />
-                  <FaWindowClose
-                    onClick={(e) => this.handleDelete(e, index)}
-                    className="apagarLivro"
-                  />
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <Livros
+          livros={livros}
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+        />
       </div>
     );
   }
