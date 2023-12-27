@@ -17,18 +17,29 @@
       <h1>Estante</h1>
 
       <form action="#" class="formLogin">
-        <input
-          type="text"
-          class="inputNome p-1"
-          placeholder="Nome de usuário"
-        />
-        <input
-          type="text"
-          class="inputSenha p-1"
-          placeholder="Digite sua senha"
-        />
+        <div class="form-floating inputDiv">
+          <input
+            type="text"
+            class="form-control inputLogin"
+            id="floatinginput"
+            placeholder="Nome de usuário"
+          />
+          <label for="floatinginput">Digite seu nome</label>
+        </div>
+        <div class="form-floating inputDiv">
+          <input
+            type="password"
+            class="form-control inputLogin"
+            id="floatingsenha"
+            placeholder="Digite sua senha"
+          />
+          <label for="floatingsenha">Digite sua senha</label>
+        </div>
+
         <button class="botao rounded-pill p-2">Entrar</button>
-        <footer>@andre</footer>
+        <footer class="position-absolute start-50 translate-middle">
+          @André
+        </footer>
       </form>
     </main>
     <script

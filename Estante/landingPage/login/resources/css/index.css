@@ -44,13 +44,22 @@ body {
   flex-direction: column;
   gap: 2vh;
 }
-input {
+
+.inputLogin {
   border: none;
+  border-radius: 0;
+  background-color: transparent;
   border-bottom: 2px solid var(--primaryColor);
   width: 40vh;
+  padding: 1vh;
 }
 
-input::placeholder {
+.inputDiv,
+.inputDiv > label {
+  background-color: transparent;
+  outline: none;
+}
+.inputDiv > label {
   color: var(--primaryColor);
 }
 
@@ -58,10 +67,10 @@ input::placeholder {
   margin-top: 10vh;
   border: none;
   background-color: var(--accentColor);
-  width: 45vh;
+  width: 40vh;
 }
 
 footer {
-  font-size: small;
+  top: 95vh;
   color: var(--primaryColor);
 }
